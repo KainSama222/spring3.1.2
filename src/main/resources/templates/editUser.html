@@ -1,10 +1,24 @@
 <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Edit user</title>
 </head>
 <body>
-$END$
+<form th:action="@{/users}" th:method="PUT" th:object="${user}">
+    <input type="hidden" th:field="*{id}" th:value="*{getId()}">
+    <br>
+    <label for="name">Name:</label>
+    <input type="text" th:field="*{firstName}" th:value="*{getFirstName()}" id="name"/>
+    <br/>
+    <label for="lastName">Lastname:</label>
+    <input type="text" th:field="*{lastName}" th:value="*{getLastName()}" id="lastName"/>
+    <br/>
+    <label for="email">Email:</label>
+    <input type="text" th:field="*{email}" th:value="*{getEmail()}" id="email"/>
+    <br/>
+    <input type="submit" value="Edit!">
+</form>
 </body>
 </html>
