@@ -30,8 +30,14 @@ public class UserController {
         return "addUser";
     }
 
+    @PutMapping()
+    public String saveUser(@ModelAttribute("user") User user) {
+        userService.save(user);
+        return "redirect:/users";
+    }
+
     @GetMapping("/{id}/edit")
-    public String editUserForm(@PathVariable(value = "id") long id, Model model) {
+    public String editUserForm(@PathVariable(value = "id") Long id, Model model) {
         User user = userService.getUserById(id);
         if (null == user) {
             return "redirect:/users";
@@ -40,14 +46,14 @@ public class UserController {
         return "editUser";
     }
 
-    @PutMapping()
-    public String saveUser(@ModelAttribute("user") User user) {
-        userService.save(user);
+    @PatchMapping()
+    public String updateUser(@ModelAttribute("user") User user) {
+        userService.update(user);
         return "redirect:/users";
     }
 
     @DeleteMapping("/{id}/delete")
-    public String delete(@PathVariable("id") long id) {
+    public String delete(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/users";
     }
